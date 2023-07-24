@@ -68,7 +68,7 @@ console.log(userAll);
     const { name, value } = e.target;
     setSessionData((prevData) => ({ ...prevData, [name]: value }))
   };
-
+const formateurs = userAll.filter(user => user.role === 'formateur' )
   return (
     <div className="gestion">
       <h1>Gestion de Sessions</h1>
@@ -91,7 +91,7 @@ console.log(userAll);
                   <Form.Label>Formateur</Form.Label>
                   <Form.Select name="formateur" >
                   <option >Choisir un formateur</option>
-                    {userAll.map((user) => (
+                    {formateurs.map((user) => (
                       <option key={user._id} value={user._id}>
                         {user.name}
                       </option>
