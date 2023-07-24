@@ -17,6 +17,7 @@ require('./config/passport/passport');
 
 //connect to database
 require('./config/db');
+require('./config/seed/seed');
 
 const authApi = require('./controller/authentificationController');
 const formation = require('./controller/formationController');

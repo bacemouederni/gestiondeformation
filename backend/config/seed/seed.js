@@ -1,5 +1,5 @@
-const db = require('../database/database')
-// const { User } = require('../../models/userSchema')
+const db = require('../db');
+const { User,validate } = require('../../model/userModel')
 const bcrypt = require('bcryptjs')
 const salt = bcrypt.genSaltSync(10);
 const hash = bcrypt.hashSync('test', salt);
@@ -16,12 +16,7 @@ const hash = bcrypt.hashSync('test', salt);
                 role: "admin"
             },
            
-            {
-                name: 'Hazem Kaied',
-                email: 'gaiedhazem@gmail.com',
-                password: hash,
-                role: "admin"
-            }
+            
         ]
        
         await User.insertMany(usersToInsert);
