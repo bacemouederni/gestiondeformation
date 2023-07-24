@@ -66,7 +66,7 @@ const addFormateur = async (formateurData) => {
   };
   const deletFormateur = async (formateurId) => {
     try {
-      const response = await axios.delete(`${API_URL}/user/${formateurId}`);
+      const response = await axios.delete(`${API_URL}/user/${formateurId}`,headers);
       return  response.data;
     } catch (err) {
       return err.message;

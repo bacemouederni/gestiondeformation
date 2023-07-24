@@ -10,20 +10,13 @@ const {Formation, validate} = require("../model/formationModel.js");
 // Get All formation from database
 router.get('/formation', passport.authenticate("bearer", { session: false }),async (req, res) => {
 
-    console.log('controller');
+    
     const formation = await Formation.find();
     res.json(formation);
 });
 
-// Get All formation from database
-router.get('/nombreformation', passport.authenticate("bearer", { session: false }),async (req, res) => {
-    var query = Formation.find();
-query.count(function (err, count) {
-    if (err) console.log(err)
-    else  res.json(count);
-});
-   
-});
+
+
 // Get Single formation from by ID from database
 router.get('/formation/:id', passport.authenticate("bearer", { session: false }), async (req, res) => {
     const formation = await Formation.findById(req.params.id);

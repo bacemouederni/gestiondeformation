@@ -2,7 +2,7 @@ const db = require('../database/database')
 // const { User } = require('../../models/userSchema')
 const bcrypt = require('bcryptjs')
 const salt = bcrypt.genSaltSync(10);
-const hash = bcrypt.hashSync('admin123', salt);
+const hash = bcrypt.hashSync('test', salt);
 
 (async () => {
     console.log("=> starting init script ...");
@@ -11,16 +11,11 @@ const hash = bcrypt.hashSync('admin123', salt);
         const usersToInsert = [
             {
                 name: 'bacem ouederni',
-                email: 'bacem ouederni@gmail.com',
+                email: 'bacemouederni@gmail.com',
                 password: hash,
                 role: "admin"
             },
-            {
-                name: 'Emna Belhaj',
-                email: 'emnabelhaj98@gmail.com',
-                password: hash,
-                role: "admin"
-            },
+           
             {
                 name: 'Hazem Kaied',
                 email: 'gaiedhazem@gmail.com',

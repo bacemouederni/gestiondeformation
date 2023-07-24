@@ -65,7 +65,7 @@ const addFormation = async (formationData) => {
   };
   const deletFormation = async (formationId) => {
     try {
-      const response = await axios.post(`${API_URL}/formation/${formationId}`,headers);
+      const response = await axios.delete(`${API_URL}/formation/${formationId}`,headers);
       return  response.data;
     } catch (err) {
       return err.message;

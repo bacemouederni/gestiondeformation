@@ -20,7 +20,7 @@ export default function Session() {
   const [selectedFormateur, setSelectedFormateur] = useState('');
   const [selectedFormation, setSelectedFormation] = useState('');
   const [sessionData, setSessionData] = useState()
-
+console.log(userAll);
   useEffect(() => {
     getSession();
   }, []);
@@ -31,6 +31,7 @@ export default function Session() {
       const response = await axios.get('http://localhost:3001/api/v1/session',headers);
       const { sessions, users, formations } = response.data;
       setSessions(sessions||[]);
+      //console.log(sessions);
       setUserAll(users || []);
       setFormationAll(formations || []);
     } catch (error) {
@@ -63,7 +64,6 @@ export default function Session() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(sessionData);
   const handelChange = (e) => {
     const { name, value } = e.target;
     setSessionData((prevData) => ({ ...prevData, [name]: value }))
@@ -154,8 +154,12 @@ export default function Session() {
         <tbody>
           {sessions.map((session) => (
             <tr key={session._id}>
-              <td>{session.formateur}</td>
-              <td>{session.formation}</td>
+                {userAll.filter(user => user._id === session.formateur ).map(filtred => (
+               <td>{filtred.name}</td> 
+             ))}
+             {formationAll.filter(formation => formation._id === session.formation ).map(filtre => (
+               <td>{filtre.title}</td> 
+             ))}
               <td>{session.organisme}</td>
               <td>{session.lieu}</td>
               <td>{session.date_debut}</td>

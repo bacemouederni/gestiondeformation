@@ -7,18 +7,15 @@ const sessionFormation=mongoose.Schema({
     organisme:{
         type: String,
      },
-    lieu:{
-        type: String,
-     },
      date_debut:{
         type: String,
      },
      date_fin:{
         type: String,
      },
-    
-
-     
+    lieu:{
+        type: String,
+     }
 })
 const  Session=mongoose.model('session',sessionFormation,'session')
 const validate = (Session) => {
@@ -26,13 +23,11 @@ const validate = (Session) => {
         formateur: Joi.required(),
         formation: Joi.required(),
         organisme: Joi.string().required(),
-        lieu: Joi.number().required(),
         date_debut: Joi.string().required(),
         date_fin: Joi.string().required(),
-       
-        
+        lieu: Joi.number().required()
     });
     return sessionFormation.validate(Session);
 };
 
-module.exports = Session;validate;
+module.exports =  { Session, validate };

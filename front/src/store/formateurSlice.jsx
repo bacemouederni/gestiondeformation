@@ -158,7 +158,7 @@ builder.addCase(addFormateur.pending, (state) => {
       position: "bottom-left",
     });
     state.error = "";
-   //  window.location.reload();
+    window.location.reload();
 
   });
   builder.addCase(addFormateur.rejected, (state, action) => {
@@ -174,7 +174,7 @@ builder.addCase(addFormateur.pending, (state) => {
   builder.addCase(editFormateur.fulfilled, (state, action) => {
     state.status = "succeeded";
     state.formateur = action.payload;
-   // window.location.reload();
+   window.location.reload();
     toast.info("Formateur updated !", {
       position: "bottom-left",
     });

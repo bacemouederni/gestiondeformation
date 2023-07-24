@@ -4,6 +4,13 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const EditSession = () => {
+  const token = localStorage.getItem('token');
+  const headers= {
+   headers:{
+   Authorization: `Bearer ${token}`,
+     Accept: 'application/json',
+   },
+ }
   const [userAll, setUserAll] = useState([]);
   const [formationAll, setFormationAll] = useState([]);
   const [sessions, setSessions] = useState([]);
@@ -22,7 +29,7 @@ const EditSession = () => {
   async function getSession() {
     try {
 
-      const response = await axios.get('http://localhost:3001/api/v1/session');
+      const response = await axios.get('http://localhost:3001/api/v1/session',headers);
       const { sessions, users, formations } = response.data;
       setSessions(sessions||[]);
       setUserAll(users || []);
@@ -35,12 +42,12 @@ const EditSession = () => {
   useEffect(() => {
     getSession();
   }, []);
-  console.log(userAll);
+  console.log(sessionData);
 
   useEffect(() => {
     const getSessionById = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/v1/session/${id}`);
+        const response = await axios.get(`http://localhost:3001/api/v1/session/${id}`,headers);
         const session  = response.data;
         console.log(session.formation);
         setSessionData(session || {});
@@ -57,7 +64,7 @@ const EditSession = () => {
     e.preventDefault();
 
     try {
-    const res=  await axios.put(`http://localhost:3001/api/v1/session/${id}`, sessionData);
+    const res=  await axios.put(`http://localhost:3001/api/v1/session/${id}`, sessionData,headers);
     console.log("test",sessionData);
       
   
