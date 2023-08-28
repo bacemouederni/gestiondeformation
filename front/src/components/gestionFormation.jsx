@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addFormation, getFormation, deletFormation } from '../store/formationSlice';
  
 export default function GestionFormation() {
+  const [filterText, setFilterText] = useState('');
+
   const [show, setShow] = useState(false);
   const [formationData, setFormationData] = useState({
     title: '',
@@ -16,6 +18,7 @@ export default function GestionFormation() {
     domaine: '',
     type_formation: '',
   });
+ 
 
   const dispatch = useDispatch();
   const formations = useSelector((state) => state.formation.formations);
@@ -43,13 +46,23 @@ export default function GestionFormation() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const filteredFormations = formations.filter((formation) =>
+  formation.title.toLowerCase().includes(filterText.toLowerCase())
+
+);
+console.log(filteredFormations);
   return (
     <div className="gestion">
       <h1>GestionFormations</h1>
       <Form onChange={onChange} method="post">
         <Row className="align-items-center">
           <Col xs={9}>
-            <Form.Control type="text" placeholder="Enter input" />
+          <Form.Control
+          type="text"
+          placeholder="Enter input"
+          value={filterText} // Utilisation du texte de filtrage
+          onChange={(e) => setFilterText(e.target.value)} // Mise à jour du texte de filtrage
+        />
           </Col>
           <Col xs={3}>
             <Button variant="primary" onClick={handleShow}>
@@ -124,7 +137,7 @@ export default function GestionFormation() {
       <Table striped>
         <thead>
           <tr>
-            <th>Title</th>
+            <th>title</th>
             <th>nb_session</th>
             <th>duree</th>
             <th>budget</th>
@@ -134,7 +147,7 @@ export default function GestionFormation() {
           </tr>
         </thead>
         <tbody>
-          {formations.map((formation) => (
+          {filteredFormations.map((formation) => (
             <tr key={formation._id}>
               <td>{formation.title}</td>
               <td>{formation.nb_session}</td>
